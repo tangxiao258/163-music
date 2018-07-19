@@ -1,0 +1,21 @@
+window.eventHub = {
+	events:{
+		// "update": [fn, fn, fn] 
+	},
+	on(eventName, fn){  // 事件订阅
+		if(this.events[eventName] === undefined){
+			this.events[eventName] = []
+		}
+		this.events[eventName].push(fn)
+	},
+	emit(eventName, data){  // 时间发布
+		for(let key in this.events){
+			if(key === eventName){
+				let fnList = this.events[key]
+				fnList.map((fn) => {
+					fn.call(undefined, data)
+				})
+			}
+		}
+	}
+}

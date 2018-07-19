@@ -15,19 +15,19 @@
 		    <aside>
 				<div class="total-operator">
 				    <button class="total-operator-button success">前往图库</button>
-				    <button class="total-operator-button primary">新建歌单</button>
+				    <button id="newPlaylist" class="total-operator-button primary">新建歌单</button>
 					<div class="playlist-search">
 						<svg class="icon" aria-hidden="true">
 						    <use xlink:href="#icon-search"></use>
 						</svg>
-						<input type="text" placeholder="搜索歌单">
+						<input id="searchPlaylist" type="text" placeholder="搜索歌单">
 					</div>
 				</div>
 				<div class="playlist-content">
 					<h4>歌单列表</h4>
 					<div class="playlist-operator">
 					    <!-- <button class="operator-button is-disabled" disabled="true">默认</button> -->
-						<button class="operator-button primary is-disabled" disabled="true">
+						<button id="eidtPlaylist" class="operator-button primary is-disabled" disabled="true">
 							<svg class="icon" aria-hidden="true">
 							    <use xlink:href="#icon-edit"></use>
 							</svg>
@@ -42,20 +42,6 @@
 					<div class="playlist-container">
 						<ul class="playlist-wrapper">
 							<li class="active">全部歌曲</li>
-							<li>你的名字</li>
-							<li>你的名字</li>
-							<li>你的名字</li>
-							<li>你的名字</li>
-							<li>你的名字</li>
-							<li>你的名字</li>
-							<li>你的名字</li>
-							<li>你的名字</li>
-							<li>你的名字</li>
-							<li>你的名字</li>
-							<li>你的名字</li>
-							<li>你的名字</li>
-							<li>你的名字</li>
-							<li>你的名字</li>
 						</ul>
 					</div>
 				</div>
@@ -96,120 +82,18 @@
 							<td>http://xxxxx</td>
 							<td>7.9M</td>
 						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>那朵花</td>
-							<td>xxx</td>
-							<td>https://xxxxx</td>
-							<td>http://xxxxx</td>
-							<td>7.9M</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>那朵花</td>
-							<td>xxx</td>
-							<td>https://xxxxx</td>
-							<td>http://xxxxx</td>
-							<td>7.9M</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>那朵花</td>
-							<td>xxx</td>
-							<td>https://xxxxx</td>
-							<td>http://xxxxx</td>
-							<td>7.9M</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>那朵花</td>
-							<td>xxx</td>
-							<td>https://xxxxx</td>
-							<td>http://xxxxx</td>
-							<td>7.9M</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>那朵花</td>
-							<td>xxx</td>
-							<td>https://xxxxx</td>
-							<td>http://xxxxx</td>
-							<td>7.9M</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>那朵花</td>
-							<td>xxx</td>
-							<td>https://xxxxx</td>
-							<td>http://xxxxx</td>
-							<td>7.9M</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>那朵花</td>
-							<td>xxx</td>
-							<td>https://xxxxx</td>
-							<td>http://xxxxx</td>
-							<td>7.9M</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>那朵花</td>
-							<td>xxx</td>
-							<td>https://xxxxx</td>
-							<td>http://xxxxx</td>
-							<td>7.9M</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>那朵花</td>
-							<td>xxx</td>
-							<td>https://xxxxx</td>
-							<td>http://xxxxx</td>
-							<td>7.9M</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>那朵花</td>
-							<td>xxx</td>
-							<td>https://xxxxx</td>
-							<td>http://xxxxx</td>
-							<td>7.9M</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>那朵花</td>
-							<td>xxx</td>
-							<td>https://xxxxx</td>
-							<td>http://xxxxx</td>
-							<td>7.9M</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>那朵花</td>
-							<td>xxx</td>
-							<td>https://xxxxx</td>
-							<td>http://xxxxx</td>
-							<td>7.9M</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox"></td>
-							<td>那朵花</td>
-							<td>xxx</td>
-							<td>https://xxxxx</td>
-							<td>http://xxxxx</td>
-							<td>7.9M</td>
-						</tr>
 					</tbody>
 				</table>
 				</div>
 			</div>
 		</main>
 		<script src="//at.alicdn.com/t/font_754723_3lhxltovesy.js"></script>
-		<script>
-			edit.onclick = (e) => {
-				console.log('lala')
-			}
-		</script>
+		<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.7.3/dist/av-min.js"></script>
+		<script src="./src/js/init-leancloud.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+		<script src="./src/js/eventHub.js"></script>
+		<script src="./src/js/admin/new-playlist.js"></script>
+		<script src="./src/js/admin/playlist.js"></script>
+		<script src="./src/js/admin/search-playlist.js"></script>
 	</body>
 </html>

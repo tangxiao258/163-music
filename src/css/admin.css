@@ -5,6 +5,8 @@
 *{margin:0;padding:0;box-sizing: border-box;}
 *::after, *::before{box-sizing: border-box;}
 ol, ul{list-style: none;}
+button:focus{outline: none;}
+input:focus{outline: none;}
 html, body{font-size:14px; font-family: core_sans,"Avenir Next","Helvetica Neue",Helvetica,Arial,"PingFang SC","Source Han Sans SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi MicroHei",sans-serif; }
 
 header{width:100%; height:64px; background-color: #d43c33; display: flex; justify-content: space-between; align-items: center; color: #fff; }
@@ -47,3 +49,20 @@ table{border-collapse:collapse; }
 thead, tbody{text-align: left; }
 thead th, tbody td{padding:10px; color:#8f9bb3; font-weight: normal; border-bottom:1px solid #ebeef5; }
 thead th>input[type=checkbox],tbody td>input[type=checkbox]{margin-top:4px; }
+
+
+/*dialog*/
+.dialog-container{position: fixed; top:0; left: 0; width:100%; height: 100%; background-color: rgba(0,0,0,0.4); z-index: 3; display: flex; align-items: center; justify-content: center; }
+.dialog-inner{width:400px; height:260px; background-color: #fff; border-radius: 4px; padding:15px 0; position: relative; }
+.dialog-title{font-weight: normal; font-size: 18px; padding:0 15px 10px; border-bottom:1px solid #ddd; }
+.dialog-footer{position: absolute; bottom: 0; left: 0; width: 100%; padding:15px; display: flex; justify-content: flex-end; border-top:1px solid #ddd; }
+.dialog-footer button{margin-left:20px; }
+.dialog-content input[type=text]{line-height:18px; padding:6px 12px; border-radius: 4px; border:1px solid #ddd; }
+.dialog-content input[type=text]:focus{outline: none;border:1px solid rgba(25, 137, 250, 0.4);}
+.dialog-content{padding:20px; }
+.dialog-content form .row{padding-bottom:5px;}
+.dialog-content form .row .input-row{display: flex; align-items: center; }
+.dialog-content form .row .validate-tips{margin-left: 90px;color:#f56c6c;line-height: 20px;height: 20px; font-size: 10px;}
+.dialog-content form .row label{width:60px; text-align: right; margin-right:20px; position: relative;}
+.dialog-content form .row label::before{content:'*';color:#f56c6c;margin-right: 4px;}
+.dialog-content form .row input{flex:1; }

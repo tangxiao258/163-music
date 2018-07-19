@@ -13,7 +13,8 @@
 			*{margin:0;padding:0;box-sizing: border-box;}
 			*::after, *::before{box-sizing: border-box;}
 			ol, ul{list-style: none;}
-			body{
+			html, body{
+				font-size:14px;
 				font-family: core_sans,"Avenir Next","Helvetica Neue",Helvetica,Arial,"PingFang SC","Source Han Sans SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi MicroHei",sans-serif;
 			}
 			header{
@@ -32,7 +33,7 @@
 				font-weight: 600;
 			}
 
-			nav{
+			aside{
 				padding-top:27px;
 				width:240px;
 				height:calc(100vh - 64px);
@@ -83,9 +84,16 @@
 				border-radius: 16px;
 				outline: none;
 			}
-
+			.playlist-content{
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+			}
 			.playlist-content h4{
 				font-weight: normal;
+				text-align: center;
+				margin:20px 40px;
 			}
 			button.operator-button{
 				padding:0 20px;
@@ -134,9 +142,68 @@
 			    background-color: #f0f9eb;
 			    border-color: #e1f3d8;
 			}
+			.playlist-operator{
+				width: 100%;
+				height:45px;
+				display: flex;
+				justify-content: space-around;
+			}
 
 			.playlist-wrapper{
+				width:100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+			}
+			.playlist-wrapper li{
+				width:100%;
+				padding-left: 20px;
+				color:#8d9199;
+				height: 45px;
+				display: flex;
+				align-items: center;
+			}
+			.playlist-wrapper li.active{
+				color:#1989fa;
+				background-color: #e6e9f0;
+			}
 
+			main{
+				width:100%;
+				display: flex;
+			}
+			.music-container{
+				width:calc(100vw - 240px);
+				padding:15px;
+			}
+			.operator-container{
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 20px;
+			}
+			.music-list{
+				width:100%;
+			}
+			.music-list-container{
+				height:calc(100vh - 150px);
+				overflow: auto;
+			}
+			table{
+				border-collapse:collapse;
+			}
+			thead, tbody{
+				text-align: left;
+			}
+			thead th, tbody td{
+				padding:10px;
+				color:#8f9bb3;
+				font-weight: normal;
+				border-bottom:1px solid #ebeef5;
+			}
+			thead th>input[type=checkbox],tbody td>input[type=checkbox]{
+				margin-top:4px;
 			}
 		</style>
 	</head>
@@ -147,7 +214,7 @@
 			<p class="author">by <span>Demo_12</span></p>
 		</header>
 		<main>
-			<nav>
+		    <aside>
 				<div class="total-operator">
 					<ul class="top-nav">
 						<li>前往图库</li>
@@ -169,10 +236,155 @@
 						<!-- <button class="operator-button success is-disabled" disabled="true">成功</button> -->
 					</div>
 					<ul class="playlist-wrapper">
-						<li>全部歌曲</li>
+						<li class="active">全部歌曲</li>
+						<li>你的名字</li>
 					</ul>
 				</div>
-			</nav>
+			</aside>
+			<div class="music-container">
+				<div class="operator-container">
+					<div class="operator-button-container">
+						<button class="operator-button primary">上传歌曲</button>
+						<button class="operator-button danger">删除歌曲</button>
+					</div>
+					<div class="playlist-search">
+						<svg class="icon" aria-hidden="true">
+						    <use xlink:href="#icon-search"></use>
+						</svg>
+						<input type="text" placeholder="搜索歌曲">
+					</div>
+				</div>
+				<div class="music-list-container">
+					<table class="music-list">
+					<thead>
+						<tr class="table-header">
+							<th>
+								<input type="checkbox">
+							</th>
+							<th>歌曲名</th>
+							<th>歌手</th>
+							<th>封面</th>
+							<th>外链</th>
+							<th>文件大小</th>
+						</tr>
+					</thead>
+					<tbody class="music-list-content">
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>那朵花</td>
+							<td>xxx</td>
+							<td>https://xxxxx</td>
+							<td>http://xxxxx</td>
+							<td>7.9M</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>那朵花</td>
+							<td>xxx</td>
+							<td>https://xxxxx</td>
+							<td>http://xxxxx</td>
+							<td>7.9M</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>那朵花</td>
+							<td>xxx</td>
+							<td>https://xxxxx</td>
+							<td>http://xxxxx</td>
+							<td>7.9M</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>那朵花</td>
+							<td>xxx</td>
+							<td>https://xxxxx</td>
+							<td>http://xxxxx</td>
+							<td>7.9M</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>那朵花</td>
+							<td>xxx</td>
+							<td>https://xxxxx</td>
+							<td>http://xxxxx</td>
+							<td>7.9M</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>那朵花</td>
+							<td>xxx</td>
+							<td>https://xxxxx</td>
+							<td>http://xxxxx</td>
+							<td>7.9M</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>那朵花</td>
+							<td>xxx</td>
+							<td>https://xxxxx</td>
+							<td>http://xxxxx</td>
+							<td>7.9M</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>那朵花</td>
+							<td>xxx</td>
+							<td>https://xxxxx</td>
+							<td>http://xxxxx</td>
+							<td>7.9M</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>那朵花</td>
+							<td>xxx</td>
+							<td>https://xxxxx</td>
+							<td>http://xxxxx</td>
+							<td>7.9M</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>那朵花</td>
+							<td>xxx</td>
+							<td>https://xxxxx</td>
+							<td>http://xxxxx</td>
+							<td>7.9M</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>那朵花</td>
+							<td>xxx</td>
+							<td>https://xxxxx</td>
+							<td>http://xxxxx</td>
+							<td>7.9M</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>那朵花</td>
+							<td>xxx</td>
+							<td>https://xxxxx</td>
+							<td>http://xxxxx</td>
+							<td>7.9M</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>那朵花</td>
+							<td>xxx</td>
+							<td>https://xxxxx</td>
+							<td>http://xxxxx</td>
+							<td>7.9M</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td>那朵花</td>
+							<td>xxx</td>
+							<td>https://xxxxx</td>
+							<td>http://xxxxx</td>
+							<td>7.9M</td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+			</div>
 		</main>
 		<script src="//at.alicdn.com/t/font_754723_l6kkfnphmmg.js"></script>
 		<script>

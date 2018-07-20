@@ -7,10 +7,10 @@
 				<h1 class="dialog-title">编辑歌单</h1>
 			    <div class="dialog-content">
 			    	<form>
-			    	    <div class="row" style="display:none;">
+			    	    <div class="row">
 			    			<div class="input-row">
 			    			    <label for="name">ID</label>
-			    		        <input type="text" name="id" placeholder="请输入歌单名" value="__id__">
+			    		        <input type="text" name="id" disabled placeholder="请输入歌单名" value="__id__">
 			    			</div>
 			    			<p class="validate-tips"></p>
 			    		</div>
@@ -35,7 +35,6 @@
 			    	<button id="canclePlaylist" class="operator-button danger">取消</button>
 			    </div>
 			</div>
-			<script src="./src/js/admin/edit-playlist-button.js"></script>
 		</div>
 		`,
 		render(data){
@@ -50,6 +49,9 @@
 		},
 		editDisabled(){
 			$(this.el).find('button').addClass('is-disabled').attr('disabled', true)
+		},
+		removeDialog(){
+			$('body').find('.edit-playlist-dialog').remove()
 		}
 	}
 
@@ -60,6 +62,14 @@
 			return playlist.destroy().then((success) => {
 			   return success
 			});
+		},
+		save(){
+		    var todo = AV.Object.createWithoutData('Playlist', this.data.id);
+		    todo.set('name', this.data.name);
+		    todo.set('cover', this.data.cover);
+		    return todo.save().then((result) => {
+		    	return result;
+		    })
 		}
 	}
 
@@ -84,12 +94,50 @@
 		bindEvents(){
 			$(this.view.el).on('click', '.primary', (e) => {
 				this.view.render(this.model.data)
+				this.validateForm()
 			})
 
 			$(this.view.el).on('click', '.danger', (e) => {
 				this.model.delete().then((success) => {
 					window.eventHub.emit('deletePlaylist', this.model.data)
 				})
+			})
+
+			$('body').on('click', '#savePlaylist', (e) => {
+				let isValidate = Boolean($('body').find('.validate-tips').text())
+				if(!isValidate){ // 验证是否通过
+					let valueList = ['name', 'cover']
+					valueList.map((key) => {
+						this.model.data[key] = $('.edit-playlist-dialog').find(`input[name=${key}]`).val()
+					})
+					this.model.save().then((result) => {
+						window.eventHub.emit('updatePlaylist', this.model.data)
+						this.view.removeDialog()
+					})
+				}
+			})
+
+			$('body').on('click', '#canclePlaylist', (e) => {
+				this.view.removeDialog()
+			})
+		},
+		validateForm(){
+			$('body').find('#playlistName').on('blur', (e) => {
+				let value = $(e.currentTarget).val()
+				if(!value){
+					$(e.currentTarget).parent().siblings('.validate-tips').text('请输入歌单名')
+				}else{
+					$(e.currentTarget).parent().siblings('.validate-tips').text('')
+				}
+			})
+
+			$('body').find('#playlistCover').on('blur', (e) => {
+				let value = $(e.currentTarget).val()
+				if(!value){
+					$(e.currentTarget).parent().siblings('.validate-tips').text('请输入歌单封面链接')
+				}else{
+					$(e.currentTarget).parent().siblings('.validate-tips').text('')
+				}
 			})
 		}
 	}

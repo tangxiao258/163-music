@@ -28,22 +28,73 @@
 			    	<button id="canclePlaylist" class="operator-button danger">取消</button>
 			    </div>
 			</div>
-			<script src="./src/js/admin/new-playlist-button.js"></script>
 		</div>
-		`
+		`,
+		remove(){
+			$('body').find('.new-playlist-dialog').remove()
+		}
 	}
 
-	let model = {}
+	let model = {
+		data:{},
+		new(){
+			var Playlist = AV.Object.extend('Playlist');
+			var playlist = new Playlist();
+			playlist.set('name',this.data.name);
+			playlist.set('cover', this.data.cover);
+			return playlist.save().then((result) => {
+			  	return result;
+			});
+		}
+	}
 
 	let controller = {
 		init(view, model){
 			this.view = view
 			this.model = model
 			this.bindEvents()
+			this.validateForm()
 		},
 		bindEvents(){
 			$(this.view.el).on('click', (e) => {
 				$('body').append(this.view.template)
+			})
+
+			$('body').on('click', '#createPlaylist',(e) => {
+				let isValidate = Boolean($('body').find('.validate-tips').text())
+				if(!isValidate){ // 验证是否通过
+					let valueList = ['name', 'cover']
+					valueList.map((key) => {
+						this.model.data[key] = $('.new-playlist-dialog').find(`input[name=${key}]`).val()
+					})
+					this.model.new().then((result) => {
+						window.eventHub.emit('newPlaylist', this.model.data)
+						this.view.remove()
+					})
+				}
+			})
+
+			$(this.view.el).on('click', '#canclePlaylist', (e) => {
+				this.view.remove()
+			})
+		},
+		validateForm(){
+			$(this.view.el).find('#playlistName').on('blur', (e) => {
+				let value = $(e.currentTarget).val()
+				if(!value){
+					$(e.currentTarget).parent().siblings('.validate-tips').text('请输入歌单名')
+				}else{
+					$(e.currentTarget).parent().siblings('.validate-tips').text('')
+				}
+			})
+
+			$(this.view.el).find('#playlistCover').on('blur', (e) => {
+				let value = $(e.currentTarget).val()
+				if(!value){
+					$(e.currentTarget).parent().siblings('.validate-tips').text('请输入歌单封面链接')
+				}else{
+					$(e.currentTarget).parent().siblings('.validate-tips').text('')
+				}
 			})
 		}
 	}

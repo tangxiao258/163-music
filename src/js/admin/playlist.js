@@ -1,10 +1,14 @@
 {
 	let view = {
 		el: '.playlist-wrapper',
-		render(data){
+		render(data, activeIndex){
 			$(this.el).find('.playlist').remove()
-			let liList = data.map((item) => {
-				return $(`<li class="playlist">${item.name}</li>`)
+			let liList = data.map((item, index) => {
+				let liDom = $(`<li class="playlist">${item.name}</li>`)
+				if(index === activeIndex){
+					liDom.addClass('active')
+				}
+				return liDom
 			})
 			$(this.el).append(liList)
 		}
@@ -40,7 +44,7 @@
 				let isPlaylist = $(e.currentTarget).attr('class').indexOf('playlist') === 0 ? true : false
 				if(isPlaylist){
 					let index = $(e.currentTarget).index()
-					window.eventHub.emit('editAbled', this.model.data[index])
+					window.eventHub.emit('editAbled', this.model.data[index - 1])
 				}else{
 					window.eventHub.emit('editDisabled')
 				}
@@ -54,6 +58,29 @@
 
 			window.eventHub.on('newPlaylist', (data) => {
 				this.model.data.push(data)
+				this.view.render(this.model.data)
+			})
+
+			window.eventHub.on('updatePlaylist', (data) => {
+				let activeIndex = -1
+				this.model.data.map((item, index) => {
+					if(item.id === data.id){
+						item.name = data.name
+						item.cover = data.cover
+						activeIndex = index
+					}
+				})
+				this.view.render(this.model.data, activeIndex)
+			})
+
+			window.eventHub.on('deletePlaylist', (data) => {
+				let deleteIndex = -1
+				this.model.data.map((item, index) => {
+					if(item.id === data.id){
+						deleteIndex = index
+					}
+				})
+				this.model.data.splice(deleteIndex, 1)
 				this.view.render(this.model.data)
 			})
 		},

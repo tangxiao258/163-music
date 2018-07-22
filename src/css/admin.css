@@ -68,4 +68,4 @@ thead th>input[type=checkbox],tbody td>input[type=checkbox]{margin-top:4px; }
 .dialog-content form .row label::before{content:'*';color:#f56c6c;margin-right: 4px;}
 .dialog-content form .row input{flex:1; }
 
-.new-song-dialog > .dialog-inner{height:460px;}
+.new-song-dialog > .dialog-inner, .edit-song-dialog > .dialog-inner{height:460px;}
